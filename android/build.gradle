@@ -1,0 +1,81 @@
+buildscript {
+    repositories {
+        maven {
+            url "http://maven.meiyou.com/nexus/content/repositories/releases"
+        }
+        maven {
+            url "http://maven.meiyou.com/nexus/content/repositories/snapshots"
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/google"
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/jcenter"
+        }
+        maven {
+            url 'https://dl.bintray.com/umsdk/release'
+        }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+    }
+}
+
+allprojects {
+    repositories {
+        maven {
+            url publicUrl
+        }
+        maven {
+            url deployUrl
+        }
+        maven {
+            url deployReleaseUrl
+        }
+        maven {
+            url thirdpartyUrl
+        }
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public'
+        }
+        maven {
+            url "https://dl.bintray.com/thelasterstar/maven/"
+        }
+        maven{
+            url 'http://developer.huawei.com/repo/'
+        }
+        maven {
+            url "http://repo.baichuan-android.taobao.com/content/groups/BaichuanRepositories/"
+        }
+//        maven {
+//            url 'https://maven.google.com/'
+//            name 'Google'
+//        }
+        maven {
+            url "https://maven.aliyun.com/repository/google"
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/jcenter"
+        }
+        maven {
+            url 'https://dl.bintray.com/umsdk/release'
+        }
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
