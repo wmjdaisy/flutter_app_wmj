@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_wmj/animation/animation_page.dart';
+import 'package:flutter_app_wmj/route/navigation_util.dart';
+
+import 'bean/base_bean.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,7 +21,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   var _strlist = [
-    "基础布局",
+    BaseBean("动画知识",new AnimationPage()),
   ];
 
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -52,12 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: new Container(
           child: ListTile(
             leading: new Icon(Icons.android),
-            title: new Text(widget._strlist[index]),
+            title: new Text(widget._strlist[index].name),
             trailing: new Icon(Icons.image),
           ),
         ),
         onTap: (){
-          print('点击：'+index.toString());
+          NavigationUtil.pushNouter(context, widget._strlist[index].object, (Map str){
+            print(str["result_resume"]);
+          });
         },
       );
     }

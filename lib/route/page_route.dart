@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class PageRoute {
+import 'animation_util.dart';
+
+class PageRouteUtil {
   static Route<T> getRoute<T>(Object object) {
     return PageRouteBuilder(
       pageBuilder: (BuildContext context, Animation<double> animation,
@@ -13,7 +15,7 @@ class PageRoute {
           Animation<double> animation,
           Animation<double> secondaryAnimation,
           Widget child){
-          return ;
+          return AnimationUtil.getCommomPageTransition(animation, child);
       },
     );
   }
